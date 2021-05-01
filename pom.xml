@@ -6,7 +6,20 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.siddarthsreeni</groupId>
     <artifactId>lazy-cache</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
+
+
+    <name>Lazy Cache</name>
+    <description>Simple non-bloated in-memory object ttl caching but Lazy</description>
+    <url>https://github.com/siddarthsreeni/lazy-cache</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <developers>
         <developer>
@@ -93,6 +106,9 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>2.9.1</version>
+                        <configuration>
+                            <detectJavaApiLink>false</detectJavaApiLink>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
