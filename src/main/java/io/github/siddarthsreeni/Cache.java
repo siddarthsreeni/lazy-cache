@@ -1,4 +1,4 @@
-package ss.lazycache;
+package io.github.siddarthsreeni;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -115,8 +115,8 @@ public class Cache<K, V> implements Map<K, V> {
          * Override the default storing mechanism of time of an instance
          * of T in cache. By default this is LinkedList.class
          *
-         * @param timeStore
-         * @return
+         * @param timeStore stores the key-time in an FIFO Queue.
+         * @return instance of this CacheBuilder
          */
         public CacheBuilder<K, V> withTimeStore(Queue<KeyPair<K, Long>> timeStore) {
             this.timeStore = timeStore;

@@ -1,6 +1,7 @@
 # lazy-cache
 
-Simple LazyCache Implementation of a Map.class 
+Simple 
+LazyCache Implementation of a Map.class 
 which has a TTL for each Object defined inside in the Cache.class
 
 The cache works on the implementation of a simple FIFO Queue & 

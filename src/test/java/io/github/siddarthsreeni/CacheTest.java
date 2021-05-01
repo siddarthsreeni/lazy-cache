@@ -1,4 +1,4 @@
-package ss.lazycache;
+package io.github.siddarthsreeni;
 
 import org.junit.Assert;
 import org.junit.Before;

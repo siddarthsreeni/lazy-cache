@@ -1,4 +1,4 @@
-package ss.lazycache;
+package io.github.siddarthsreeni;
 
 /**
  * created by Siddarth Sreeni on 01-05-2021
