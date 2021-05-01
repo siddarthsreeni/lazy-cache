@@ -17,3 +17,18 @@ Simple Demo
   Thread.sleep(1001);
   Assert.assertEquals(cache.size(), 0);
 ``` 
+
+How to use in your project?
+
+```
+   //maven 
+   <dependency>
+     <groupId>io.github.siddarthsreeni</groupId>
+     <artifactId>lazy-cache</artifactId>
+     <version>1.0.0</version>
+   </dependency>
+
+   // scala-sbt 
+   libraryDependencies += "io.github.siddarthsreeni" % "lazy-cache" % "1.0.0"
+
+```
