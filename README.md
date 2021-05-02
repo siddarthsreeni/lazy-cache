@@ -1,13 +1,15 @@
-# lazy-cache
+<img align="right" src="https://raw.githubusercontent.com/siddarthsreeni/lazy-cache/master/docs/logo.PNG?raw=true" />
 
-Simple 
-LazyCache Implementation of a Map.class 
-which has a TTL for each Object defined inside in the Cache.class
+# lazy-cache #
 
-The cache works on the implementation of a simple FIFO Queue & 
+[![Build Status](https://travis-ci.com/siddarthsreeni/lazy-cache.svg?branch=main)](https://travis-ci.com/siddarthsreeni/lazy-cache)
+[![Github All Releases](https://img.shields.io/github/downloads/siddarthsreeni/lazy-cache/total.svg)]()
+
+
+Simple LazyCache Implementation of a Map.class which has a TTL for each Object defined inside in the `Cache.class` The cache works on the implementation of a simple FIFO Queue & 
 Lazy removal of Objects from Cache.
 
-Simple Demo
+## Sample Code ##
 
 ```
   Cache<Object, Object> cache = new Cache.CacheBuilder<>().withExpiry(1000)
@@ -18,7 +20,7 @@ Simple Demo
   Assert.assertEquals(cache.size(), 0);
 ``` 
 
-How to use in your project?
+## Quick Start ##
 
 ```
    //maven 

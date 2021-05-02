@@ -11,22 +11,46 @@ public class Cache<K, V> implements Map<K, V> {
     private final long ttl;
     private final Queue<KeyPair<K, Long>> timeStore;
     private final Map<K, V> objectStore;
+    private final long period;
 
-    private Cache(long ttl, Queue<KeyPair<K, Long>> timeStore, Map<K, V> objectStore) {
+    private Cache(long ttl, Queue<KeyPair<K, Long>> timeStore, Map<K, V> objectStore, long cleanUpPeriod) {
         this.ttl = ttl;
         this.timeStore = timeStore;
         this.objectStore = objectStore;
+        this.period = cleanUpPeriod;
+        if (period > 0) {
+            Timer timer = new Timer(this.getClass().getSimpleName(), true);
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    lazyRun();
+                }
+            };
+            timer.scheduleAtFixedRate(task, ttl, cleanUpPeriod);
+
+        }
     }
 
-    private void lazyRun() {
+    public long getTtl() {
+        return ttl;
+    }
+
+    public long getPeriod() {
+        return period;
+    }
+
+    private int lazyRun() {
+        int count = 0;
         while (timeStore.size() > 0) {
             if ((System.currentTimeMillis() - timeStore.peek().getValue() > ttl)) {
                 KeyPair<K, Long> ref = timeStore.poll();
                 objectStore.remove(ref.getKey());
+                count += 1;
             } else {
                 break;
             }
         }
+        return count;
     }
 
 
@@ -99,6 +123,7 @@ public class Cache<K, V> implements Map<K, V> {
         private Queue<KeyPair<K, Long>> timeStore = new LinkedList<>();
         private Map<K, V> objectStore = new ConcurrentHashMap<>();
         private long ttl = Long.MAX_VALUE;
+        private long cleanUpPeriod = 0;
 
         /**
          * set the expiry of objects in ttl.
@@ -123,11 +148,20 @@ public class Cache<K, V> implements Map<K, V> {
             return this;
         }
 
+        public CacheBuilder<K, V> withCleanUpPeriod(long cleanUpPeriod) {
+            this.cleanUpPeriod = cleanUpPeriod;
+            return this;
+        }
+
         public Cache<K, V> build() {
             if (ttl == Long.MAX_VALUE) {
                 throw new IllegalArgumentException("no ttl is provided.");
             }
-            return new Cache<K, V>(ttl, timeStore, objectStore);
+            if (cleanUpPeriod > ttl) {
+                throw new IllegalArgumentException("CleanUp Period cannot be more than ttl," +
+                        " to disable timed clean up, set 0. Suggested value is " + ttl / 2);
+            }
+            return new Cache<K, V>(ttl, timeStore, objectStore, cleanUpPeriod);
         }
 
     }
