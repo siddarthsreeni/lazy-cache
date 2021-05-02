@@ -72,4 +72,15 @@ public class CacheTest {
         Assert.assertEquals(cache.get("hello"), "world");
         clearCache();
     }
+
+    @Test
+    public void testWithCleanUpEnabled() throws InterruptedException {
+        Cache<String, String> stringCache = new Cache.CacheBuilder<String, String>()
+                .withExpiry(1500)
+                .withCleanUpPeriod(300)
+                .build();
+        stringCache.put("hello", "world");
+        Thread.sleep(2000);
+        Assert.assertEquals(stringCache.size(), 0);
+    }
 }

@@ -1,4 +1,4 @@
-<img align="right" src="https://raw.githubusercontent.com/siddarthsreeni/lazy-cache/master/docs/logo.PNG?raw=true" />
+<img align="right" src="https://github.com/siddarthsreeni/lazy-cache/blob/main/docs/logo.PNG?raw=true" />
 
 # lazy-cache #
 
